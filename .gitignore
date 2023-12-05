@@ -1,0 +1,10 @@
+# pyvenv
+bin/
+include/
+lib/
+share/
+lib64
+pyvenv.cfg
+
+# vscode
+.vscode/
