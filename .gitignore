@@ -6,5 +6,8 @@ share/
 lib64
 pyvenv.cfg
 
+# packages
+__pycache__/
+
 # vscode
 .vscode/
