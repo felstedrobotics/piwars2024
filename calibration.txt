@@ -1,0 +1,8 @@
+red_lower = [136,87,111]
+red_upper = [180,255,255]
+
+green_lower = [25,52,72]
+green_upper = [102,255,255]
+
+blue_lower = [94,80,2]
+blue_upper = [126,255,255]

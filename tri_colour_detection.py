@@ -1,6 +1,15 @@
 import numpy as np
 import cv2
+from calibration_loader import load_calibration
 
+# load calibration values
+values = load_calibration()
+red_lower_arr = values[0]
+red_upper_arr = values[1]
+green_lower_arr = values[2]
+green_upper_arr = values[3]
+blue_lower_arr = values[4]
+blue_upper_arr = values[5]
 
 # Capturing video through webcam
 webcam = cv2.VideoCapture(0)
@@ -13,24 +22,29 @@ while 1:
     # BGR(RGB color space) to
     # HSV(hue-saturation-value)
     # color space
+
+    if not _:
+        print("Could not read frame")
+        break
+
     hsvFrame = cv2.cvtColor(imageFrame, cv2.COLOR_BGR2HSV)
 
     # Set range for red color and
     # define mask
-    red_lower = np.array([136, 87, 111], np.uint8)
-    red_upper = np.array([180, 255, 255], np.uint8)
+    red_lower = np.array([red_lower_arr], np.uint8)
+    red_upper = np.array([red_upper_arr], np.uint8)
     red_mask = cv2.inRange(hsvFrame, red_lower, red_upper)
 
     # Set range for green color and
     # define mask
-    green_lower = np.array([25, 52, 72], np.uint8)
-    green_upper = np.array([102, 255, 255], np.uint8)
+    green_lower = np.array([green_lower_arr], np.uint8)
+    green_upper = np.array([green_upper_arr], np.uint8)
     green_mask = cv2.inRange(hsvFrame, green_lower, green_upper)
 
     # Set range for blue color and
     # define mask
-    blue_lower = np.array([94, 80, 2], np.uint8)
-    blue_upper = np.array([120, 255, 255], np.uint8)
+    blue_lower = np.array([blue_lower_arr], np.uint8)
+    blue_upper = np.array([blue_upper_arr], np.uint8)
     blue_mask = cv2.inRange(hsvFrame, blue_lower, blue_upper)
 
     # Morphological Transform, Dilation
