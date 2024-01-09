@@ -6,3 +6,9 @@ green_upper = [102,255,255]
 
 blue_lower = [94,80,2]
 blue_upper = [126,255,255]
+
+white_lower = [0,0,180]
+white_upper = [180,25,255]
+
+grey_lower = [0,0,100]
+grey_upper = [180,255,200]
