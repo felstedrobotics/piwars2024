@@ -1,14 +1,14 @@
 red_lower = [102,0,0] 
-red_upper = [255,102,102] 
+red_upper = [255,100,100] 
 
-green_lower = [51,102,0] 
-green_upper = [153, 255, 153] 
+green_lower = [0,100,0] 
+green_upper = [100, 255, 100] 
 
-blue_lower = [0,102,204]
-blue_upper = [102,102,255]
+blue_lower = [0,0,100]
+blue_upper = [70,70,255]
 
-white_lower = [240,240,240] 
+white_lower = [200,200,200] 
 white_upper = [255,255,255] 
 
-grey_lower = [96,96,96] 
-grey_upper = [222,222,222] 
+grey_lower = [128,128,128] 
+grey_upper = [192,192,192] 
