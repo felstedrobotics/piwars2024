@@ -1,13 +1,21 @@
-from flask import Flask, request, render_template
-
-# from redis_connector import connect, get_messages_in_time_range
+from flask import Flask, request, render_template, send_from_directory
+from flask_caching import Cache
 import time
 import redis
+import re
 from redis.exceptions import ConnectionError
 
 app = Flask(__name__)
 
-from redis.exceptions import ConnectionError
+cache_config = {
+    "CACHE_TYPE": "redis",
+    "CACHE_REDIS_HOST": "localhost",
+    "CACHE_REDIS_PORT": "6379",
+    "CACHE_REDIS_DB": "0",
+    "CACHE_REDIS_URL": "redis://localhost:6379/0",
+}
+app.config.from_mapping(cache_config)
+cache = Cache(app)
 
 
 def connect():
@@ -113,15 +121,71 @@ def funct(page=1):
 @app.route("/data/<int:page>")
 def all_data(page=1):
     r = connect()
-    messages = list(r.xrange("sensor_data"))
     per_page = 100  # Number of messages per page
     start = (page - 1) * per_page
-    end = start + per_page
-    messages = messages[start:end]  # Get only the messages for this page
-    return render_template("data.html", messages=messages, page=page)
+    end = start + per_page - 1
 
+    # Get the query from the URL parameters
+    query = request.args.get("q")
+    if query is None:
+        query = request.args.get("query", "")
+
+    # Get the messages from the stream
+    messages = list(r.xrange("sensor_data"))
+
+    # Filter the messages based on the query
+    filtered_messages = [msg for msg in messages if query in str(msg)]
+
+    # Calculate the total number of pages
+    total_pages = (len(filtered_messages) + per_page - 1) // per_page
+
+    # Paginate the filtered messages
+    start = (page - 1) * per_page
+    end = start + per_page
+    paginated_messages = filtered_messages[start:end]
+
+    return render_template(
+        "data.html",
+        messages=paginated_messages,
+        page=page,
+        query=query,
+        total_pages=total_pages,
+        is_filtered=bool(query),
+    )
+
+
+"""
+@app.before_request
+def before_request():
+    if request.path.startswith("/data/"):
+        try:
+            with open("./templates/data.html", "r") as f:
+                content = f.read()
+
+            # Check if the HTML file contains a link to a CSS file
+            css_file = re.search(r'href="([^"]*.css)"', content)
+            if css_file:
+                css_file = css_file.group(1)
+
+                # Cache the CSS file
+                @cache.cached(timeout=50)
+                def cached_css():
+                    return send_from_directory("static", css_file)
+
+                cached_css()
+        except FileNotFoundError:
+            print("Cannot cache: File not found")
+"""
+
+"""
+@app.teardown_appcontext
+def close_redis():
+    r = connect()
+
+    if redis is not None:
+        r.close()
+"""
 
 if __name__ == "__main__":
     print("Starting server...")
-    app.run(debug=True, host="127.0.0.1", port=5000)
-    print("Server started")
+    app.run(debug=True, host="0.0.0.0", port=5000)

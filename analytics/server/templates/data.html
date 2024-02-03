@@ -1,20 +1,59 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/main.css">
     <title>Data Page</title>
 </head>
 <body>
-    <h1>Data Page</h1>
-    <ul>
-        {% for msg in messages %}
-            <li>{{ msg }}</li>
-        {% endfor %}
-    </ul>
-    <div>
-        {% if page > 1 %}
-            <a href="{{ url_for('all_data', page=page-1) }}">Previous</a>
+<body>
+    <!-- Same structure as index page -->
+    <div class="top-bar">
+        <h2>Data Page</h2>
+    </div>
+    <div class="left-bar">
+        <div id="nav">
+            <div class="left-bar-text">
+                <h3>Navigation</h3>
+                <ul>
+                    <li><a class="navlink" href="/">about</a></li>
+                    <li><a class="navlink" href="/data/1">data</a></li>
+                    <li><a class="navlink" href="/raw_data/1">raw data</a></li>
+                </ul>
+            </div>
+            <div class="info">
+                <p>Version 1.0.0</p>
+                <p>Felsted Robotics</p>
+            </div>
+        </div>
+    </div>
+    <div class="main-content">
+        {% if is_filtered %}
+            <h3>Filtered Results</h3>
         {% endif %}
-        <a href="{{ url_for('all_data', page=page+1) }}">Next</a>
+        <div>
+            <form class="filter-form" method="GET" action="{{ url_for('all_data', page=page) }}">
+                <input type="text" name="query" value="{{ query | default('') }}" placeholder="Enter query here">
+                <input type="submit" value="Filter">
+            </form>
+        </div>
+        <div>
+            <ul>
+            {% for msg in messages %}
+                <li>{{ msg }}</li>
+            {% endfor %}
+            </ul>
+            <div class="button-container">
+                {% if page > 1 %}
+                    <a class="next-button" href="{{ url_for('all_data', page=page-1) }}">Previous</a>
+                {% endif %}
+                {% if page < total_pages %}
+                    <a class="next-button" href="{{ url_for('all_data', page=page+1) }}">Next</a>
+                {% endif %}
+            </div>
+        </div>
     </div>
 </body>
 </html>

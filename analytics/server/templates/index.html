@@ -1,13 +1,31 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Landing Page</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- stylesheey-->
+    <link rel="stylesheet" href="../static/main.css">
+    <title>Anlalytics</title>
 </head>
 <body>
-    <h1>Welcome to our site!</h1>
-    <ul>
-        <li><a href="{{ url_for('all_data', page=1) }}">Data Page</a></li>
-        <!-- Add more links here as needed -->
-    </ul>
+    <div class="top-bar">
+        <h2>Analytics</h1>
+    </div>
+    <div class="left-bar">
+        <div id="nav">
+            <div class="left-bar-text">
+                <h3>Navigation</h3>
+                <ul>
+                    <li><a class="navlink" href="/">about</a></li>
+                    <li><a class="navlink" href="/data/1">data</a></li>
+                    <li><a class="navlink" href="/raw_data/1">raw data</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="info">
+            <p>Version 1.0.0</p>
+            <p>Felsted Robotics</p>
+        </div>
+    </div>
 </body>
-</html>

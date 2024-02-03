@@ -1,0 +1,95 @@
+body, html {
+    margin: 0;
+    padding: 0;
+}
+/* remove bullets from list */
+ul {
+    list-style-type: none;
+}
+/* remove underlines from links */
+a {
+    text-decoration: none;
+}   
+.top-bar {
+    position: sticky;
+    top: 0;
+    left: 0;
+    
+    background-color: cadetblue;
+    padding: 3px 0;
+    text-align: left;
+    padding-left: 1%;
+    border: 0;
+    border-bottom: 1px solid #6a6a6a;
+}
+.next-button {
+    background-color: cadetblue;
+    color: white;
+    padding: 3px 8px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 20px 2px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+.left-bar {
+    position: fixed;
+    left: 0;
+    background-color: #f9f9f9;
+    border-right: 1px solid #6a6a6a;
+    width: 200px;
+    height: 100vh; /* 100% of the viewport height */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1; /* Add this line */
+}
+.left-bar-text {
+    color: #000000; /* Change the color of the text */
+    padding-left: 1%;
+    margin: 0;
+    padding: 3px 0;
+    text-align: left;
+}
+.button-container {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    padding: 10px;
+}
+.info {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0; /* Add this line */
+    width: 200px; /* Set a specific width */
+    text-align: center;
+}
+.main-content {
+    margin-left: 200px; /* Equal to the width of the .left-bar */
+    padding-left: 5px;
+}
+.filter-form {
+    padding: 10px; /* Padding around the form */
+    margin-bottom: 20px; /* Space below the form */
+    border-radius: 5px; /* Rounded corners */
+}
+
+.filter-form input[type="text"] {
+    padding: 5px; /* Padding inside the text input */
+    border-radius: 3px; /* Rounded corners */
+    border: 1px solid #ccc; /* Border around the text input */
+    width: 80%; /* Width of the text input */
+}
+
+.filter-form input[type="submit"] {
+    padding: 5px 10px; /* Padding inside the submit button */
+    background-color: #4CAF50; /* Background color for the submit button */
+    color: white; /* Text color for the submit button */
+    border: none; /* No border around the submit button */
+    cursor: pointer; /* Cursor style when hovering over the submit button */
+    border-radius: 3px; /* Rounded corners */
+}

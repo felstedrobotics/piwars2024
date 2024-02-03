@@ -2,3 +2,4 @@ numpy==1.26
 opencv-python==4.8.1.78
 flask==2.0.1
 redis==3.5.3
+Flask-caching==1.10.1
