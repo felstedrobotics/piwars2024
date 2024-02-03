@@ -17,7 +17,7 @@ def load_calibration():
     grey_lower = []
     grey_upper = []
 
-    with open("calibration.txt", "r") as f:
+    with open("./config/calibration.cfg", "r") as f:
         for line in f:
             if re.match("red_lower", line):
                 red_lower = re.findall(r"[-+]?\d*\.\d+|\d+", line)
@@ -43,43 +43,43 @@ def load_calibration():
     try:
         for i in red_lower:
             i = int(i)
-            if len(i) > 3:
+            if len(str(i)) > 3:
                 i = i[:3]
         for i in red_upper:
             i = int(i)
-            if len(i) > 3:
+            if len(str(i)) > 3:
                 i = i[:3]
         for i in green_lower:
             i = int(i)
-            if len(i) > 3:
+            if len(str(i)) > 3:
                 i = i[:3]
         for i in green_upper:
             i = int(i)
-            if len(i) > 3:
+            if len(str(i)) > 3:
                 i = i[:3]
         for i in blue_lower:
             i = int(i)
-            if len(i) > 3:
+            if len(str(i)) > 3:
                 i = i[:3]
         for i in blue_upper:
             i = int(i)
-            if len(i) > 3:
+            if len(str(i)) > 3:
                 i = i[:3]
         for i in white_lower:
             i = int(i)
-            if len(i) > 3:
+            if len(str(i)) > 3:
                 i = i[:3]
         for i in white_upper:
             i = int(i)
-            if len(i) > 3:
+            if len(str(i)) > 3:
                 i = i[:3]
         for i in grey_lower:
             i = int(i)
-            if len(i) > 3:
+            if len(str(i)) > 3:
                 i = i[:3]
         for i in grey_upper:
             i = int(i)
-            if len(i) > 3:
+            if len(str(i)) > 3:
                 i = i[:3]
     except ValueError:
         print("Error: Calibration values must be integers or floats.")
