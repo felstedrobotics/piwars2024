@@ -11,3 +11,7 @@ __pycache__/
 
 # vscode
 .vscode/
+.todo
+
+# Tailwind CSS
+node_modules/

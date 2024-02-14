@@ -154,6 +154,17 @@ def all_data(page=1):
     )
 
 
+#! testing
+@app.route("/test")
+def test():
+    return render_template("test.html")
+
+
+@app.route("/static/<path:path>")
+def send_static(path):
+    return send_from_directory("static", path)
+
+
 """
 @app.before_request
 def before_request():
