@@ -4,28 +4,46 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- stylesheey-->
-    <link rel="stylesheet" href="../static/main.css">
+    <link href="{{ url_for('static', filename='css/tailwind.css') }}" rel="stylesheet">
     <title>Anlalytics</title>
 </head>
 <body>
     <div class="top-bar">
-        <h2>Analytics</h1>
+        <h2 class="text-white">Analytics</h2>
     </div>
-    <div class="left-bar">
+    <div class="left-bar", id="left-bar">
+        <button id="collapse-button">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" width="25" height="25">
+                <path d="M192 64C86 64 0 150 0 256S86 448 192 448H384c106 0 192-86 192-192s-86-192-192-192H192zm192 96a96 96 0 1 1 0 192 96 96 0 1 1 0-192z"/>
+            </svg>
+        </button>
         <div id="nav">
-            <div class="left-bar-text">
-                <h3>Navigation</h3>
-                <ul>
-                    <li><a class="navlink" href="/">about</a></li>
-                    <li><a class="navlink" href="/data/1">data</a></li>
-                    <li><a class="navlink" href="/raw_data/1">raw data</a></li>
-                </ul>
-            </div>
+            <ul class="list-none">
+                <li>
+                    <button class="nav-button" onclick="location.href='/'">
+                        <span class="button-text">about</span>
+                        <span class="button-icon hidden">Icon</span>
+                    </button>
+                </li>
+                <li>
+                    <button class="nav-button" onclick="location.href='/data/1'">
+                        <span class="button-text">data</span>
+                        <span class="button-icon hidden">Icon</span>
+                    </button>
+                </li>
+                <li>
+                    <button class="nav-button" onclick="location.href='/raw_data/1'">
+                        <span class="button-text">raw data</span>
+                        <span class="button-icon hidden">Icon</span>
+                    </button>
+                </li>
+            </ul>
         </div>
-        <div class="info">
+        <div>
             <p>Version 1.0.0</p>
             <p>Felsted Robotics</p>
         </div>
     </div>
+    <script src="../static/script.js"></script>
 </body>
+</html>
