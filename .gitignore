@@ -15,3 +15,6 @@ __pycache__/
 
 # Tailwind CSS
 node_modules/
+
+# tensorflow
+tensorFlow/output
