@@ -1,0 +1,3 @@
+[submodule "RedBoard"]
+	path = RedBoard
+	url = https://github.com/RedRobotics/RedBoard
