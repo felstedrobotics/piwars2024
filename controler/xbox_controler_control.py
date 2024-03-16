@@ -19,6 +19,9 @@ while discovery is None:
 # Bind the controller to the function
 unbind_function = bind_controllers(discovery, print_events=False)
 
+# Set LED colour
+redboard.RedBoard._set_led_rgb(0, 0, 255)
+
 
 try:
     for lx, ly in discovery.controller.stream["lx", "ly"]:
