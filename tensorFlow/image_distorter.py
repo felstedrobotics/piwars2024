@@ -2,6 +2,7 @@ from PIL import Image, ImageEnhance, ImageOps
 import numpy as np
 import os
 import random
+from alive_progress import alive_bar
 
 
 def add_red_filter(image_path, output_path):
@@ -72,7 +73,7 @@ def add_blue_filter(image_path, output_path):
     img.save(output_path)
 
 
-def distort_image(image_path, output_path, distortion_scale=0.3, brightness_factor=1.2):
+def distort_image(image_path, output_path, distortion_scale=0.8, brightness_factor=1.5):
     # Open the image file
     img = Image.open(image_path)
     img = img.convert("RGB")
@@ -147,21 +148,23 @@ def process_directory(
     os.makedirs(output_dir, exist_ok=True)
 
     # Iterate over all files in the input directory
-    for filename in os.listdir(input_dir):
-        if filename.endswith(".jpg") or filename.endswith(".png"):
-            # Construct full file path
-            input_path = os.path.join(input_dir, filename)
+    with alive_bar(len(os.listdir(input_dir)) * num_distorted_images) as bar:
+        for filename in os.listdir(input_dir):
+            if filename.endswith(".jpg") or filename.endswith(".png"):
+                # Construct full file path
+                input_path = os.path.join(input_dir, filename)
 
-            # Generate multiple distorted versions of the image
-            for i in range(num_distorted_images):
-                output_path = os.path.join(
-                    output_dir,
-                    f"{os.path.splitext(filename)[0]}_{i}{os.path.splitext(filename)[1]}",
-                )
-                distortion_scale = min_distortion + (
-                    max_distortion - min_distortion
-                ) * i / (num_distorted_images - 1)
-                distort_image(input_path, output_path, distortion_scale)
+                # Generate multiple distorted versions of the image
+                for i in range(num_distorted_images):
+                    output_path = os.path.join(
+                        output_dir,
+                        f"{os.path.splitext(filename)[0]}_{i}{os.path.splitext(filename)[1]}",
+                    )
+                    distortion_scale = min_distortion + (
+                        max_distortion - min_distortion
+                    ) * i / (num_distorted_images - 1)
+                    distort_image(input_path, output_path, distortion_scale)
+                    bar()
 
 
 # Usage
