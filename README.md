@@ -36,8 +36,7 @@ To install Pi Wars, follow these steps:
 
 To use Pi Wars, follow these steps:
 
-1. Run the python file:
-    ``` python
-    python3 tri_colour_detection.py
-    ```
-2. GUI should appear on screen.
+![Pinout](components/pi/gpio.png)
+![Full pinout](components/pi/gpio_pinout.png)
+
+![Robot Image](components/redboard_outputs.png)
