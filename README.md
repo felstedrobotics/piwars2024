@@ -1,9 +1,10 @@
 # PiWars 2024 Project
+
 This project is designed for the PiWars 2024 competition.
 
-# Installation Guide
+## Installation Guide
 
-## Prerequisites
+### Prerequisites
 
 Before you begin, ensure you have met the following requirements:
 
@@ -18,17 +19,20 @@ Before you begin, ensure you have met the following requirements:
 To install Pi Wars, follow these steps:
 
 1. Clone the repository:
-    ```
+
+    ```bash
     git clone https://github.com/arozx/piwars2024.git
     ```
 
 2. Navigate to the project directory:
-    ```
+
+    ```bash
     cd piwars2024
     ```
 
 3. Install the requirements using pip:
-    ```
+
+    ```bash
     pip install -r requirements.txt
     ```
 
