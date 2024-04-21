@@ -1,8 +1,9 @@
-from time import sleep
-from approxeng.input.controllers import find_matching_controllers, ControllerRequirement
-from approxeng.input.selectbinder import bind_controllers
-import redboard
 import curses
+from time import sleep
+
+import redboard
+from approxeng.input.controllers import ControllerRequirement, find_matching_controllers
+from approxeng.input.selectbinder import bind_controllers
 
 discovery = None
 
@@ -30,30 +31,29 @@ def main(stdscr):
     motor2 = 0
 
     while True:
-
         curses.halfdelay(1)
 
         try:
             for lx, ly, rx, ry in discovery.controller.stream["lx", "ly", "rx", "ry"]:
                 print("Left stick: x={}, y={}\n".format(lx, ly))
                 print("Right stick: x={}, y={}\n".format(rx, ry))
-                if lx > 0:
-                    motor1 += 100 * lx
-                    motor2 -= 100 * lx
-                if lx < 0:
-                    motor1 -= 100 * lx
-                    motor2 += 100 * lx
+                if ly > 0:
+                    motor1 += 100 * ly
+                    motor2 -= 100 * ly
+                if ly < 0:
+                    motor1 -= -100 * ly
+                    motor2 += -100 * ly
 
                 redboard.M1(motor1)
                 redboard.M2(motor2)
 
                 # Control motors based on right joystick
                 if ry > 0:
-                    motor1 += 100 * ry
-                    motor2 += 100 * ry
+                    motor1 += 100 * rx
+                    motor2 += 100 * rx
                 if ry < 0:
-                    motor1 -= 100 * ry
-                    motor2 -= 100 * ry
+                    motor1 -= 100 * rx
+                    motor2 -= 100 * rx
 
                 redboard.M1(motor1)
                 redboard.M2(motor2)
