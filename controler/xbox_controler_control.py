@@ -5,7 +5,6 @@ import redboard
 from approxeng.input.controllers import ControllerRequirement, find_matching_controllers
 from approxeng.input.selectbinder import bind_controllers
 
-r = redboard.RedBoard()
 discovery = None
 
 # Connect to controller
@@ -38,18 +37,30 @@ def main(stdscr):
             for lx, ly, rx, ry in discovery.controller.stream["lx", "ly", "rx", "ry"]:
                 print("Left stick: x={}, y={}\n".format(lx, ly))
                 print("Right stick: x={}, y={}\n".format(rx, ry))
-                if lx > 0:
-                    motor1, motor2 = 0, 0
-                    motor1 += 100 * lx
-                    motor2 -= 100 * lx
-                if lx < 0:
-                    motor1, motor2 = 0, 0
-                    motor1 -= 100 * lx
-                    motor2 += 100 * lx
+                if ly > 0:
+                    motor1 += 100 * ly
+                    motor2 -= 100 * ly
+                if ly < 0:
+                    motor1 -= -100 * ly
+                    motor2 += -100 * ly
 
                 redboard.M1(motor1)
                 redboard.M2(motor2)
+
+                # Control motors based on right joystick
+                if ry > 0:
+                    motor1 += 100 * rx
+                    motor2 += 100 * rx
+                if ry < 0:
+                    motor1 -= 100 * rx
+                    motor2 -= 100 * rx
+
+                redboard.M1(motor1)
+                redboard.M2(motor2)
+
                 sleep(0.1)
+                motor1 = 0
+                motor2 = 0
         except StopIteration:
             # Raised when the stream ends
             print("Controller disconnected")
