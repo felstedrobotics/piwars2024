@@ -1,7 +1,6 @@
 import curses
 from time import sleep
 
-import redboard
 from approxeng.input.controllers import ControllerRequirement, find_matching_controllers
 from approxeng.input.selectbinder import bind_controllers
 
@@ -68,9 +67,6 @@ def main(stdscr):
                     motor1 -= -100 * ly
                     motor2 += -100 * ly
 
-                redboard.M1(motor1)
-                redboard.M2(motor2)
-
                 # Control motors based on right joystick
                 if ry > 0.05:  # the deadzone
                     motor1 += 100 * rx
@@ -78,9 +74,6 @@ def main(stdscr):
                 if ry < 0.05:  # the deadzone
                     motor1 -= 100 * rx
                     motor2 -= 100 * rx
-
-                redboard.M1(motor1)
-                redboard.M2(motor2)
 
                 sleep(0.1)
                 motor1 = 0
