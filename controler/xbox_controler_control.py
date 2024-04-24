@@ -42,8 +42,10 @@ def main(stdscr):
                     discovery.controller.check_presses()
                 )  # Check for button presses
 
-                if "cross" in presses:
-                    stdscr.addstr(2, 0, "Cross pressed")
+                if "cross" in presses:  # kills all motors
+                    stdscr.addstr(2, 0, "Motors off")
+                    redboard.M1(0)
+                    redboard.M2(0)
                 if "circle" in presses:
                     stdscr.addstr(3, 0, "Circle pressed")
                 if "triangle" in presses:
